@@ -1,5 +1,8 @@
 package spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 //회원 정보를 조회해서 	=> MemberDao
 //출력하는 기능을 구현 	=> MemberPrinter
 
@@ -10,10 +13,13 @@ public class MemberInfoPrinter {
 		private MemberPrinter printer;
 		
 		// setter 메서드를 통해서 의존 객체를 주입
+		@Autowired
 		public void setMemberDao(MemberDao memberDao) {
 			this.memberDao = memberDao;
 		}
-		public void setMemberPrinter(MemberPrinter printer) {
+		@Autowired
+		@Qualifier("Printer")
+		public void setPrinter(MemberSummaryPrinter printer) {
 			this.printer = printer;
 		}
 		

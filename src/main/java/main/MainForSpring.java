@@ -5,8 +5,7 @@ import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import config.AppConf1;
-import config.AppConf2;
+import config.AppCtx;
 import spring.ChangePasswordService;
 import spring.DuplicateMemberException;
 import spring.MemberInfoPrinter;
@@ -24,8 +23,8 @@ public class MainForSpring {
 	public static void main(String[] args) {
 		
 		//AnnotationConfigApplicationContext 클래스를 이용해서 스프링 컨테이너를 생성
-		//ctx = new AnnotationConfigApplicationContext(AppCtx.class);
-		ctx = new AnnotationConfigApplicationContext(AppConf1.class, AppConf2.class);
+		ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+		//ctx = new AnnotationConfigApplicationContext(AppConf1.class, AppConf2.class);
 		
 		Scanner scan = new Scanner(System.in);
 		while(true) {

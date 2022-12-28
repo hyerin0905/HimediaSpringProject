@@ -56,6 +56,15 @@ public class AppConf2 {
 		versionPrinter.setMinorVersion(1);
 		return versionPrinter;
 	}
+	
+	@Bean
+	public VersionPrinter newversionPrinter() {
+		VersionPrinter versionPrinter = new VersionPrinter();
+		versionPrinter.setMajorVersion(5);
+		versionPrinter.setMinorVersion(1);
+		return versionPrinter;
+	}
+
 
 
 	

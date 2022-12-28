@@ -1,5 +1,6 @@
 package config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +10,7 @@ import spring.MemberInfoPrinter;
 import spring.MemberListPrinter;
 import spring.MemberPrinter;
 import spring.MemberRegisterService;
+import spring.MemberSummaryPrinter;
 import spring.VersionPrinter;
 
 // 스프링 설정 클래스를 의미
@@ -25,32 +27,49 @@ public class AppCtx {
 	
 	@Bean
 	public MemberRegisterService memberRegSvc() {
+		/*
 		return new MemberRegisterService(memberDao());
+		*/
+		return new MemberRegisterService();
 	}
 	
 	@Bean
 	public ChangePasswordService changePwdSvc() {
 		ChangePasswordService pwdSvc = new ChangePasswordService();
 		// setter 메서드를 이용해 의존 객체를 주입
-		pwdSvc.setMemberDao(memberDao());
+		/* @Bean 설정 메서드에서 의존 객체를 주입하는 코드 삭제가 가능
+		 pwdSvc.setMemberDao(memberDao());
+		*/
 		return pwdSvc;
 	}
 	
 	@Bean
+	@Qualifier("printer")	// 해당 빈의 한정값으로 printer를 지정
 	public MemberPrinter memberPrinter() {
 		return new MemberPrinter();
+	}
+	@Bean
+	@Qualifier("summaryPrinter")
+	public MemberSummaryPrinter memberPrinter2() {
+		return new MemberSummaryPrinter();
 	}
 	
 	@Bean
 	public MemberListPrinter listPrinter() {
+		/*
 		return new MemberListPrinter(memberDao(), memberPrinter());
+		*/
+		return new MemberListPrinter();
 	}
 	
 	@Bean
 	public MemberInfoPrinter infoPrinter() {
 		MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
+		/* 의존 객체(MemberDao)를 주입하기 위해 호출했던 setter 메서드를
+		 * 더이상 호출하지 않아도 됨
 		infoPrinter.setMemberDao(memberDao());
 		infoPrinter.setMemberPrinter(memberPrinter());
+		*/
 		return infoPrinter;
 	}
 	
