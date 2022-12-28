@@ -97,5 +97,6 @@ public class MainForAssembler {
 		System.out.println("change 이메일 현재비번 변경비번");
 		System.out.println();
 	}
+	
 }
 
