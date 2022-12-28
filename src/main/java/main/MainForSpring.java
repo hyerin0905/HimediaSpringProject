@@ -13,6 +13,7 @@ import spring.MemberListPrinter;
 import spring.MemberNotFoundException;
 import spring.MemberRegisterService;
 import spring.RegisterRequest;
+import spring.VersionPrinter;
 import spring.WrongIdPasswordException;
 
 public class MainForSpring {
@@ -49,9 +50,19 @@ public class MainForSpring {
 				processInfoCommand(command.split(" "));
 				continue;
 			}
+			else if (command.startsWith("version")) {
+				processInfoCommand(command.split(" "));
+				continue;
+			}
 			printHelp();
 		}
 	}
+	
+	private static void processVersionCommand() {
+		VersionPrinter versionPrinter = ctx.getBean("versionPrinter", VersionPrinter.class);
+		versionPrinter.print();
+	}
+
 	private static void processInfoCommand(String[] args) {
 		if (args.length != 2) {
 			printHelp();
@@ -134,6 +145,7 @@ public class MainForSpring {
 		System.out.println("change 이메일 현재비번 변경비번");
 		System.out.println("list");
 		System.out.println("info 이메일");
+		System.out.println("version");
 		System.out.println();
 		
 	}
